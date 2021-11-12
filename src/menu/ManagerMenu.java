@@ -79,8 +79,10 @@ public class ManagerMenu {
 
     public void delete(String phone) throws Exception {
         Scanner sc = new Scanner(System.in);
-        BookPhone bookPhone = list.getBookPhone(phone);
-        if (list.getListBookPhone().contains(bookPhone)) {
+        int index = list.findIndexByPhone(phone);
+        BookPhone bookPhone = list.getListBookPhone().get(index);
+        boolean check = bookPhone.getPhoneNumber().equals(phone);
+        if (check) {
             System.out.println("Nhập Y để xóa!");
             String y = sc.nextLine();
             if (y.equals("y")) {
@@ -94,6 +96,7 @@ public class ManagerMenu {
     public void search() throws Exception {
         Scanner sc = new Scanner(System.in);
         System.out.println("Nhập số điện thoại cần tìm:");
+        sc.nextLine();
         String phone = sc.nextLine();
         System.out.println(list.getBookPhone(phone));
     }
@@ -103,8 +106,9 @@ public class ManagerMenu {
     }
 
     public void readFile() throws Exception {
-        list.readFile();
-
+        for (int i = 0; i < list.readFile().size(); i++) {
+            System.out.println(list.readFile().get(i));
+        }
     }
 
     public void start() throws Exception {
@@ -132,6 +136,7 @@ public class ManagerMenu {
                 }
                 case 4 -> {
                     System.out.println("Nhập số điện thoại cần xóa: ");
+                    sc.nextLine();
                     String phone = sc.nextLine();
                     if (!phone.equals("")) {
                         delete(phone);
@@ -141,7 +146,10 @@ public class ManagerMenu {
                 }
                 case 5 -> search();
                 case 6 -> readFile();
-                case 7 -> writeFile();
+                case 7 -> {
+                    writeFile();
+                    System.out.println("Ghi thành công !");
+                }
                 case 8 -> System.exit(0);
                 default -> System.out.println("No choice!");
             }

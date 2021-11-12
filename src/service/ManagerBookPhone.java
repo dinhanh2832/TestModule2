@@ -48,13 +48,12 @@ public class ManagerBookPhone implements Manager<BookPhone> {
     }
 
     @Override
-    public void add(BookPhone bookPhone) throws Exception {
+    public void add(BookPhone bookPhone) {
         listBookPhone.add(bookPhone);
-        writeFile();
     }
 
     @Override
-    public void update(String phone) throws Exception {
+    public void update(String phone) {
         int index = findIndexByPhone(phone);
         BookPhone bookPhone1 = getListBookPhone().get(index);
         boolean check = bookPhone1.getPhoneNumber().equals(phone);
@@ -75,7 +74,6 @@ public class ManagerBookPhone implements Manager<BookPhone> {
             System.out.println("Nhập vào nhóm danh bạ:");
             String group = sc.nextLine();
             bookPhone1.setGroup(group);
-            writeFile();
         } else System.out.println("Không tìm được danh bạ với số điện thoại trên !");
     }
 
@@ -86,9 +84,9 @@ public class ManagerBookPhone implements Manager<BookPhone> {
     }
 
     @Override
-    public void print() throws Exception {
-        for (int i = 1; i < readFile().size() + 1; i++) {
-            System.out.println(readFile().get(i - 1));
+    public void print() {
+        for (int i = 1; i < getListBookPhone().size() + 1; i++) {
+            System.out.println(getListBookPhone().get(i - 1));
             if (i % 5 == 0) {
                 System.out.println("Nhấn enter để xem!");
                 Scanner sc = new Scanner(System.in);
@@ -121,8 +119,6 @@ public class ManagerBookPhone implements Manager<BookPhone> {
     public void writeFile() throws Exception {
         BufferedWriter bFile = new BufferedWriter(new FileWriter("contacts.csv"));
         bFile.write("Tên , Số điện thoại , Ngày sinh , Địa chỉ , Giới tính , Nhóm ");
-        List<BookPhone> bookPhoneList = readFile();
-        listBookPhone.addAll(bookPhoneList);
         for (BookPhone bookPhone : listBookPhone) {
             bFile.write(
                     "\n" + bookPhone.getName() + "," +
@@ -144,12 +140,5 @@ public class ManagerBookPhone implements Manager<BookPhone> {
             }
         }
         return null;
-    }
-
-    public static void main(String[] args) throws Exception {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("nhập");
-        String x = sc.nextLine();
-        System.out.println(ManagerBookPhone.getInstance().getBookPhone(x));
     }
 }

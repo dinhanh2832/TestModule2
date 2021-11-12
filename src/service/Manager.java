@@ -9,7 +9,7 @@ public interface Manager<T> {
 
     void update(String phone) throws Exception;
 
-    void deleteByPhone(String phone);
+    void deleteByPhone(String phone) throws Exception;
 
     void print() throws Exception;
 
