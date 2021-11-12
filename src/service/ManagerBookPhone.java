@@ -1,7 +1,6 @@
 package service;
 
 import model.BookPhone;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -12,6 +11,7 @@ import java.util.Scanner;
 
 public class ManagerBookPhone implements Manager<BookPhone> {
     private static ManagerBookPhone instance = null;
+
     static {
         try {
             instance = new ManagerBookPhone();
@@ -26,9 +26,10 @@ public class ManagerBookPhone implements Manager<BookPhone> {
         return listBookPhone;
     }
 
-    public static ManagerBookPhone getInstance(){
+    public static ManagerBookPhone getInstance() {
         return instance;
     }
+
     public ManagerBookPhone() throws Exception {
         listBookPhone.addAll(readFile());
     }
@@ -57,9 +58,9 @@ public class ManagerBookPhone implements Manager<BookPhone> {
         int index = findIndexByPhone(phone);
         BookPhone bookPhone1 = getListBookPhone().get(index);
         boolean check = bookPhone1.getPhoneNumber().equals(phone);
-        if(check){
+        if (check) {
             Scanner sc = new Scanner(System.in);
-            System.out.println("Nhập tên: ");
+            System.out.println("Nhập tên:");
             String name = sc.nextLine();
             bookPhone1.setName(name);
             System.out.println("Nhập vào giới tính:");

@@ -75,6 +75,6 @@ public class BookPhone {
                 ", Số điện thoại: " + phoneNumber +
                 ", Địa chỉ: " + address +
                 ", Giới tính: " + gentle +
-                ", Nhóm: " + group ;
+                ", Nhóm: " + group;
     }
 }

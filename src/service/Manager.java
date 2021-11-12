@@ -16,5 +16,6 @@ public interface Manager<T> {
     List<T> readFile() throws Exception;
 
     void writeFile() throws Exception;
+
     T getBookPhone(String phone) throws Exception;
 }

@@ -3,13 +3,12 @@ package menu;
 import model.BookPhone;
 import service.ManagerBookPhone;
 
-import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ManagerMenu {
-    private ManagerBookPhone list = ManagerBookPhone.getInstance();
+    private final ManagerBookPhone list = ManagerBookPhone.getInstance();
     private static final String PHONE_NUMBER = "^0[9,8,7][0-9]{8}$";
 
     public ManagerMenu() throws Exception {
@@ -29,7 +28,7 @@ public class ManagerMenu {
         System.out.println("Chọn chức năng: ");
     }
 
-    public void watchList() throws Exception {
+    public void watchList() {
         list.print();
     }
 
@@ -54,13 +53,13 @@ public class ManagerMenu {
             System.out.println("Nhập số điện thoại: ");
             number = sc.nextLine();
             if (validate(number)) {
-                System.out.println("Nhập ngày sinh:");
+                System.out.println("Nhập ngày sinh: ");
                 date = sc.nextLine();
-                System.out.println("Nhập địa chỉ:");
+                System.out.println("Nhập địa chỉ: ");
                 address = sc.nextLine();
-                System.out.println("Nhập giới tính:");
+                System.out.println("Nhập giới tính: ");
                 gentle = sc.nextLine();
-                System.out.println("Nhập nhóm:");
+                System.out.println("Nhập nhóm: ");
                 group = sc.nextLine();
                 choice = -2;
             } else System.out.println("Sai định dạng điện thoại!");
@@ -68,16 +67,16 @@ public class ManagerMenu {
         return new BookPhone(name, number, date, address, gentle, group);
     }
 
-    public void addNew() throws Exception {
+    public void addNew() {
         list.add(Input());
         System.out.println("Thêm thành công!");
     }
 
-    public void update(String phone) throws Exception {
+    public void update(String phone) {
         list.update(phone);
     }
 
-    public void delete(String phone) throws Exception {
+    public void delete(String phone) {
         Scanner sc = new Scanner(System.in);
         int index = list.findIndexByPhone(phone);
         BookPhone bookPhone = list.getListBookPhone().get(index);
@@ -95,7 +94,7 @@ public class ManagerMenu {
 
     public void search() throws Exception {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nhập số điện thoại cần tìm:");
+        System.out.println("Nhập số điện thoại cần tìm: ");
         sc.nextLine();
         String phone = sc.nextLine();
         System.out.println(list.getBookPhone(phone));
@@ -127,10 +126,10 @@ public class ManagerMenu {
                 case 1 -> watchList();
                 case 2 -> addNew();
                 case 3 -> {
-                    System.out.println("Nhập số điện thoại cần sửa:");
+                    System.out.println("Nhập số điện thoại cần sửa: ");
                     sc.nextLine();
                     String phone = sc.nextLine();
-                    if(phone.equals("")){
+                    if (phone.equals("")) {
                         start();
                     } else update(phone);
                 }
